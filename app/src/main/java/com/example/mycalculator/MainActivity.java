@@ -3,6 +3,7 @@ package com.example.mycalculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -194,74 +195,56 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void joinNumbers(String buttonInputString){
-        double buttonInputStringLength = buttonInputString.length();
-        double buttonInputNumber = Double.parseDouble(buttonInputString);
-        previousButtonNumber = (int) (previousButtonNumber * (Math.pow(10, buttonInputStringLength))
-                + buttonInputNumber );
-        String buttonClickResult = Integer.toString((int) previousButtonNumber);
-        textViewResult.setText(buttonClickResult);
+    @SuppressLint("SetTextI18n")
+    public void joinNumbers(String buttonInputString) {
+        int buttonInputNumber = Integer.parseInt(buttonInputString);
+        // Add the digit to the end of the current number being entered
+        previousButtonNumber = (previousButtonNumber * 10) + buttonInputNumber;
+        textViewResult.setText(Integer.toString((int) previousButtonNumber));
     }
 
     public void clearView(){
         textViewResult.setText("0");
-        previousButtonNumber = 0;
-        arithmeticResult = 0;
+        previousButtonNumber = arithmeticResult = 0;
     }
 
     public void addNumbers(String buttonInputString) {
         double buttonInputNumber = Double.parseDouble(buttonInputString);
         arithmeticResult += buttonInputNumber;
-        textViewResult.setText("0");
-        previousButtonNumber = 0;
         textViewResult.setText(String.valueOf(arithmeticResult));
+        previousButtonNumber = 0;
     }
 
-
-
-
-    public void subtractNumbers(String buttonInputString){
+    public void subtractNumbers(String buttonInputString) {
         double buttonInputNumber = Double.parseDouble(buttonInputString);
-        if (arithmeticResult == 0){
-            arithmeticResult = buttonInputNumber;
-        }
-        else {
-            arithmeticResult -= buttonInputNumber;
-        }
-        textViewResult.setText("0");
-        previousButtonNumber = 0;
+        // If arithmeticResult is 0, set it to the button input number
+        // Otherwise, subtract the button input number from arithmeticResult
+        arithmeticResult = (arithmeticResult == 0) ? buttonInputNumber : arithmeticResult - buttonInputNumber;
         textViewResult.setText(String.valueOf(arithmeticResult));
+        previousButtonNumber = 0;
     }
+
 
 
     public void deleteLastCharacter(@NonNull String screenText) {
-        // Check if screenText is not empty
+        // Check if screenText is not empty, remove the last character from the string
         if (!TextUtils.isEmpty(screenText)) {
-            // Remove the last character from the string
             String newText = screenText.substring(0, screenText.length() - 1);
-
-            // Set the new screenText on the TextView
-            textViewResult.setText(null);
             textViewResult.setText(newText);
         } else {
             // If the string is empty, clear the TextView
             clearView();
         }
-
         previousButtonNumber = Double.parseDouble(textViewResult.getText().toString());
     }
 
-    public void multiplyNumbers(String buttonInputString){
+    public void multiplyNumbers(String buttonInputString) {
         double buttonInputNumber = Double.parseDouble(buttonInputString);
-        if (arithmeticResult == 0){
-            arithmeticResult = buttonInputNumber;
-        }
-        else {
-            arithmeticResult *= buttonInputNumber;
-        }
-        textViewResult.setText("0");
-        previousButtonNumber = 0;
+        // If arithmeticResult is 0, set it to the button input number
+        // Otherwise, multiply the button input number from arithmeticResult
+        arithmeticResult = (arithmeticResult == 0) ? buttonInputNumber : arithmeticResult * buttonInputNumber;
         textViewResult.setText(String.valueOf(arithmeticResult));
-
+        previousButtonNumber = 0;
     }
+
 }
