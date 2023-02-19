@@ -1,8 +1,10 @@
 package com.example.mycalculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -171,9 +173,7 @@ public class MainActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String currentScreenText = textViewResult.getText().toString();
-
-
+                deleteLastCharacter(textViewResult.getText().toString());
             }
         });
 
@@ -190,9 +190,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
     }
 
@@ -235,6 +232,24 @@ public class MainActivity extends AppCompatActivity {
         previousButtonNumber = 0;
         textViewResult.setText(String.valueOf(arithmeticResult));
     }
+
+    public void deleteLastCharacter(@NonNull String screenText) {
+        // Check if screenText is not empty
+        if (!TextUtils.isEmpty(screenText)) {
+            // Remove the last character from the string
+            String newText = screenText.substring(0, screenText.length() - 1);
+
+            // Set the new screenText on the TextView
+            textViewResult.setText(null);
+            textViewResult.setText(newText);
+        } else {
+            // If the string is empty, clear the TextView
+            textViewResult.setText("");
+        }
+
+        previousButtonNumber = Double.parseDouble(textViewResult.getText().toString());
+    }
+
 
     public void multiplyNumbers(String buttonInputString){
         double buttonInputNumber = Double.parseDouble(buttonInputString);
