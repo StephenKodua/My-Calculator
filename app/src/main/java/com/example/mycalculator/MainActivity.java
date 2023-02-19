@@ -251,7 +251,6 @@ public class MainActivity extends AppCompatActivity {
         previousButtonNumber = Double.parseDouble(textViewResult.getText().toString());
     }
 
-
     public void multiplyNumbers(String buttonInputString){
         double buttonInputNumber = Double.parseDouble(buttonInputString);
         if (arithmeticResult == 0){
