@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
             textViewResult.setText(newText);
         } else {
             // If the string is empty, clear the TextView
-            textViewResult.setText("");
+            clearView();
         }
 
         previousButtonNumber = Double.parseDouble(textViewResult.getText().toString());
