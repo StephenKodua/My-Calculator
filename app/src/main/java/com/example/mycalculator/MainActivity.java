@@ -233,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
         textViewResult.setText(String.valueOf(arithmeticResult));
     }
 
+
     public void deleteLastCharacter(@NonNull String screenText) {
         // Check if screenText is not empty
         if (!TextUtils.isEmpty(screenText)) {
