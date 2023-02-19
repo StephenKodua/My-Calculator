@@ -183,6 +183,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        percentageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
+
 
     }
 
