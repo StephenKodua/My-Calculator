@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.lang.Math;
-
 public class MainActivity extends AppCompatActivity {
     private Button allClearButton;
     private Button deleteButton;
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textViewResult;
 
-    private double previousButtonNumber = 0;
+    private double previousArithmeticResult = 0;
 
     private double arithmeticResult = 0;
 
@@ -76,62 +74,62 @@ public class MainActivity extends AppCompatActivity {
         nineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("9");
+                appendInputButtonToPreviousNumber("9");
             }
         });
 
         eightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("8");
+                appendInputButtonToPreviousNumber("8");
             }
         });
         sevenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("7");
+                appendInputButtonToPreviousNumber("7");
             }
         });
         sixButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("6");
+                appendInputButtonToPreviousNumber("6");
             }
         });
         fiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("5");;
+                appendInputButtonToPreviousNumber("5");;
             }
         });
         fourButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("4");
+                appendInputButtonToPreviousNumber("4");
             }
         });
         threeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("3");
+                appendInputButtonToPreviousNumber("3");
             }
         });
         twoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("2");
+                appendInputButtonToPreviousNumber("2");
             }
         });
         oneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("1");
+                appendInputButtonToPreviousNumber("1");
             }
         });
         zeroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                joinNumbers("0");
+                appendInputButtonToPreviousNumber("0");
             }
         });
         allClearButton.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         additionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addNumbers(textViewResult.getText().toString());
+                updateAdditionResult(textViewResult.getText().toString());
             }
         });
 
@@ -160,14 +158,14 @@ public class MainActivity extends AppCompatActivity {
         subtractionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                subtractNumbers(textViewResult.getText().toString());
+                subtractFromArithmeticResult(textViewResult.getText().toString());
             }
         });
 
         multiplicationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                multiplyNumbers(textViewResult.getText().toString());
+                multiplyArithmeticResult(textViewResult.getText().toString());
             }
         });
 
@@ -196,32 +194,34 @@ public class MainActivity extends AppCompatActivity {
 
 
     @SuppressLint("SetTextI18n")
-    public void joinNumbers(String buttonInputString) {
-        int buttonInputNumber = Integer.parseInt(buttonInputString);
+    public void appendInputButtonToPreviousNumber(String inputNumberString) {
+        int inputNumber = Integer.parseInt(inputNumberString);
         // Add the digit to the end of the current number being entered
-        previousButtonNumber = (previousButtonNumber * 10) + buttonInputNumber;
-        textViewResult.setText(Integer.toString((int) previousButtonNumber));
+        int currentNumber = (int) ((previousArithmeticResult * 10) + inputNumber);
+        textViewResult.setText(Integer.toString((int) currentNumber));
+        previousArithmeticResult = currentNumber;
     }
+
 
     public void clearView(){
         textViewResult.setText("0");
-        previousButtonNumber = arithmeticResult = 0;
+        previousArithmeticResult = arithmeticResult = 0;
     }
 
-    public void addNumbers(String buttonInputString) {
-        double buttonInputNumber = Double.parseDouble(buttonInputString);
-        arithmeticResult += buttonInputNumber;
+    public void updateAdditionResult(String inputNumberString) {
+        double inputNumber = Double.parseDouble(inputNumberString);
+        arithmeticResult += inputNumber;
         textViewResult.setText(String.valueOf(arithmeticResult));
-        previousButtonNumber = 0;
+        previousArithmeticResult = 0;
     }
 
-    public void subtractNumbers(String buttonInputString) {
-        double buttonInputNumber = Double.parseDouble(buttonInputString);
-        // If arithmeticResult is 0, set it to the button input number
-        // Otherwise, subtract the button input number from arithmeticResult
-        arithmeticResult = (arithmeticResult == 0) ? buttonInputNumber : arithmeticResult - buttonInputNumber;
+    public void subtractFromArithmeticResult(String inputNumberString) {
+        double inputNumber = Double.parseDouble(inputNumberString);
+        // If the current arithmetic result is 0, set it to the input number
+        // Otherwise, subtract the input number from the current arithmetic result
+        arithmeticResult = (arithmeticResult == 0) ? inputNumber : arithmeticResult - inputNumber;
         textViewResult.setText(String.valueOf(arithmeticResult));
-        previousButtonNumber = 0;
+        previousArithmeticResult = 0;
     }
 
 
@@ -235,16 +235,16 @@ public class MainActivity extends AppCompatActivity {
             // If the string is empty, clear the TextView
             clearView();
         }
-        previousButtonNumber = Double.parseDouble(textViewResult.getText().toString());
+        previousArithmeticResult = Double.parseDouble(textViewResult.getText().toString());
     }
 
-    public void multiplyNumbers(String buttonInputString) {
-        double buttonInputNumber = Double.parseDouble(buttonInputString);
+    public void multiplyArithmeticResult(String inputNumberString) {
+        double inputNumber = Double.parseDouble(inputNumberString);
         // If arithmeticResult is 0, set it to the button input number
         // Otherwise, multiply the button input number from arithmeticResult
-        arithmeticResult = (arithmeticResult == 0) ? buttonInputNumber : arithmeticResult * buttonInputNumber;
+        arithmeticResult = (arithmeticResult == 0) ? inputNumber : arithmeticResult * inputNumber;
         textViewResult.setText(String.valueOf(arithmeticResult));
-        previousButtonNumber = 0;
+        previousArithmeticResult = 0;
     }
 
 }
