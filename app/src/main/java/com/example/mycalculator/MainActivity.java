@@ -192,7 +192,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Appends the given input digit to the end of the current number being entered and
+     * displays the updated result in the text view.
+     * @param inputNumberString The input digit as a String.
+     */
     @SuppressLint("SetTextI18n")
     public void appendInputButtonToPreviousNumber(String inputNumberString) {
         int inputNumber = Integer.parseInt(inputNumberString);
@@ -202,12 +206,24 @@ public class MainActivity extends AppCompatActivity {
         previousArithmeticResult = currentNumber;
     }
 
-
-    public void clearView(){
+    /**
+     * Clears the current view by resetting the displayed value and arithmetic result values to 0.
+     */
+    public void clearView() {
+        // Reset the displayed value to 0
         textViewResult.setText("0");
-        previousArithmeticResult = arithmeticResult = 0;
+
+        // Reset the arithmetic result values to 0
+        previousArithmeticResult = 0;
+        arithmeticResult = 0;
     }
 
+    /**
+     Updates the current arithmetic result by adding the input number to it
+     displays the updated result in the text view.
+     Also sets the previous arithmetic result to 0.
+     @param inputNumberString The input number as a String.
+     */
     public void updateAdditionResult(String inputNumberString) {
         double inputNumber = Double.parseDouble(inputNumberString);
         arithmeticResult += inputNumber;
@@ -215,6 +231,12 @@ public class MainActivity extends AppCompatActivity {
         previousArithmeticResult = 0;
     }
 
+    /**
+     * Subtracts the input number from the current arithmetic result.
+     * Updates and displays the updated arithmetic result in the text view.
+     * Also sets the previous arithmetic result to 0.
+     * @param inputNumberString The input number as a String.
+     */
     public void subtractFromArithmeticResult(String inputNumberString) {
         double inputNumber = Double.parseDouble(inputNumberString);
         // If the current arithmetic result is 0, set it to the input number
@@ -225,7 +247,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Deletes the last character from the current number being entered.
+     * Displays the updated result in the text view.
+     */
     public void deleteLastCharacter(@NonNull String screenText) {
         // Check if screenText is not empty, remove the last character from the string
         if (!TextUtils.isEmpty(screenText)) {
@@ -238,6 +263,12 @@ public class MainActivity extends AppCompatActivity {
         previousArithmeticResult = Double.parseDouble(textViewResult.getText().toString());
     }
 
+    /**
+     * Multiplies the current arithmetic result by the input number.
+     * Updates and displays the updated arithmetic result in the text view.
+     * Also sets the previous arithmetic result to 0.
+     * @param inputNumberString The input number as a String.
+     */
     public void multiplyArithmeticResult(String inputNumberString) {
         double inputNumber = Double.parseDouble(inputNumberString);
         // If arithmeticResult is 0, set it to the button input number
@@ -246,5 +277,6 @@ public class MainActivity extends AppCompatActivity {
         textViewResult.setText(String.valueOf(arithmeticResult));
         previousArithmeticResult = 0;
     }
+
 
 }
